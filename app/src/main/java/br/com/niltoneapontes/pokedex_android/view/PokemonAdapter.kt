@@ -2,6 +2,7 @@ package br.com.niltoneapontes.pokedex_android.view
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,7 @@ class PokemonAdapter(private val items: List<Pokemon?>): RecyclerView.Adapter<Po
             val tvName = findViewById<TextView>(R.id.tvName)
             val tvType1 = findViewById<TextView>(R.id.tvType1)
             val tvType2 = findViewById<TextView>(R.id.tvType2)
+            val button = findViewById<TextView>(R.id.button)
 
 
             item?.let {
