@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/black"
+        android:indeterminateTint="@color/design_default_color_primary"
         app:layout_constraintEnd_toEndOf="@+id/rvPokemons"
         app:layout_constraintStart_toStartOf="@id/rvPokemons"
         app:layout_constraintTop_toTopOf="@id/rvPokemons" />
