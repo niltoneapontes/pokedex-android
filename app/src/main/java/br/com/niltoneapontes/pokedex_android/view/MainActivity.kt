@@ -19,16 +19,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        var loading = true
         val recyclerView = findViewById<RecyclerView>(R.id.rvPokemons)
         val loaderView = findViewById<ProgressBar>(R.id.progressBar)
 
         Thread(Runnable {
             loadPokemons(recyclerView, loaderView)
         }).start()
-
     }
-
     private fun loadPokemons(
         recyclerView: RecyclerView,
         loaderView: ProgressBar
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
     fun goToDetails(view: View) {
         val pokemonNumber = this.findViewById<TextView>(R.id.tvNumber).text.toString().replace("No ", "").toInt()
-        Log.d("more: ", this.params.toString())
+
         val pokemonDetailsView = R.layout.pokemon_details
 
         setContentView(pokemonDetailsView)
