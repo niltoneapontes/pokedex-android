@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,18 +21,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.rvPokemons)
+        val loaderView = findViewById<ProgressBar>(R.id.progressBar)
 
         Thread(Runnable {
-            loadPokemons(recyclerView)
+            loadPokemons(recyclerView, loaderView)
         }).start()
-
 
     }
 
     private fun loadPokemons(
         recyclerView: RecyclerView,
+        loaderView: ProgressBar
     ) {
-        val pokemonsApiResult = PokemonRepository.getPokemons(151)
+        val pokemonsApiResult = PokemonRepository.getPokemons(50)
         pokemonsApiResult?.results?.let {
             val layoutManager = LinearLayoutManager(this)
 
@@ -59,27 +61,10 @@ class MainActivity : AppCompatActivity() {
 
     fun goToDetails(view: View) {
         val pokemonNumber = this.findViewById<TextView>(R.id.tvNumber).text.toString().replace("No ", "").toInt()
-        Log.d("ID: ", pokemonNumber.toString())
+        Log.d("more: ", this.params.toString())
         val pokemonDetailsView = R.layout.pokemon_details
-        val ivPokemon = findViewById<ImageView>(R.id.ivPokemon)
-        val tvNumber = findViewById<TextView>(R.id.tvNumber)
-        val tvName = findViewById<TextView>(R.id.tvName)
-        val tvType1 = findViewById<TextView>(R.id.tvType1)
-        val tvType2 = findViewById<TextView>(R.id.tvType2)
-
-        Glide.with(pokemonDetailsView).load(it.imageUrl).into(ivPokemon)
-        tvNumber.text = "No ${it.formattedNumber}"
-        tvName.text = it.name
-        tvType1.text = it.types[0].name
-        if(it.types.size > 1) {
-            tvType2.visibility = View.VISIBLE
-            tvType2.text = it.types[1].name
-        } else {
-            tvType2.visibility = View.GONE
-        }
 
         setContentView(pokemonDetailsView)
-
     }
 
     fun goBack(view: View) {
